@@ -8,10 +8,11 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
-import config from './config/keys';
+import dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
-  imports: [AuthModule, MongooseModule.forRoot(config.mongoURI), EventsModule, UsersModule, CloudinaryModule],
+  imports: [AuthModule, MongooseModule.forRoot(process.env.mongoURI), EventsModule, UsersModule, CloudinaryModule],
   controllers: [AppController],
   providers: [AppService],
 })

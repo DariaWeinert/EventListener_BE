@@ -7,14 +7,15 @@ import { UsersModule } from 'src/users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import keys from 'src/config/keys';
+import dotenv from 'dotenv';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 
+dotenv.config();
 @Module({
     imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]), UsersModule, PassportModule,
     JwtModule.register({
-        secret: keys.jwt_secret,
+        secret: process.env.jwt_secret,
         signOptions: { expiresIn: '864000s' },
     }),],
     controllers: [AuthController],
